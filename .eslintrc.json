@@ -1,0 +1,97 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*",
+    "node_modules",
+    "**/dist/*"
+  ],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "plugin:prettier/recommended",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": ["tsconfig.json", "e2e/tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "plugins": ["@typescript-eslint", "unused-imports"],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "import/prefer-default-export": "off",
+        "prefer-destructuring": "off",
+        "no-underscore-dangle": "off",
+        "@typescript-eslint/lines-between-class-members": "off",
+        "prefer-template": "off",
+        "no-plusplus": "off",
+        "no-continue": "off",
+        "no-param-reassign": "off",
+        // Turn off Airbnb React rules
+        "import/no-unresolved": "off",
+        "class-methods-use-this": "off",
+        // If we turn this on, any regex will be read as error
+        "no-useless-escape": "warn",
+        // Disable using of prototype calls like hasOwnProperty
+        "no-prototype-builtins": "off",
+        "default-case": "off",
+        "no-nested-ternary": "off",
+        "max-classes-per-file": "off",
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "operator-assignment": "off",
+        "no-else-return": "off",
+        "no-bitwise": "off",
+        "spaced-comment": [
+          "error",
+          "always",
+          {
+            "line": {
+              "markers": ["#region", "endregion", "region", "endregion"]
+            }
+          }
+        ],
+        "import/no-extraneous-dependencies": 0,
+        "curly": [2, "all"]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
