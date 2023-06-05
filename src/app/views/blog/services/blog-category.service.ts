@@ -21,4 +21,9 @@ export class BlogCategoryService {
     const url = `${environment.API_BASE_URL}/category`;
     return this.http.post<BlogCategoryResponse>(url, body);
   }
+
+  public delete(id: number): Observable<void> {
+    const url = `${environment.API_BASE_URL}/category/${id}`;
+    return this.http.delete<void>(url);
+  }
 }
