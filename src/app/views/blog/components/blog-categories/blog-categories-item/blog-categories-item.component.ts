@@ -7,13 +7,18 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./blog-categories-item.component.scss'],
 })
 export class BlogCategoriesItemComponent {
-  @Output() deleteEvent = new EventEmitter<number | null>();
+  @Output() deleteEvent = new EventEmitter<{ id: number | null; event: MouseEvent }>();
+  @Output() clickCategory = new EventEmitter<number | null>();
   @Input() name: string = '';
   @Input() id: number | null = null;
   isHovered = false;
   faTrash = faTrash;
 
   onDeleteCategory(): void {
-    this.deleteEvent.emit(this.id);
+    const event = new MouseEvent('click');
+    this.deleteEvent.emit({ id: this.id, event });
+  }
+  onClickCategory(): void {
+    this.clickCategory.emit(this.id);
   }
 }

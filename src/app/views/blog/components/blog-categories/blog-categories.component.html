@@ -1,9 +1,14 @@
 <div class="categories-wrapper">
   <button mat-button class="categories-add-new" (click)="openDialog()">Add +</button>
-  <div class="categories-uncategorized-item">
+  <div class="categories-uncategorized-item" (click)="selectCategory(0)">
     <span> Uncategorized </span>
   </div>
   <div class="categories-item-wrapper" *ngFor="let item of categories">
-    <app-blog-categories-item [name]="item.name" [id]="item.id" (deleteEvent)="deleteCategory($event)"></app-blog-categories-item>
+    <app-blog-categories-item
+      [name]="item.name"
+      [id]="item.id"
+      (deleteEvent)="deleteCategory($event)"
+      (clickCategory)="selectCategory($event)"
+    ></app-blog-categories-item>
   </div>
 </div>

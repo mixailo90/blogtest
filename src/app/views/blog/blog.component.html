@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="toolbar">
   <span>My Blog</span>
-  <mat-form-field> <input matInput placeholder="Search" /> </mat-form-field
+  <mat-form-field> <input matInput placeholder="Search" (input)="onInputChange($event)" /> </mat-form-field
 ></mat-toolbar>
 
 <div class="container">

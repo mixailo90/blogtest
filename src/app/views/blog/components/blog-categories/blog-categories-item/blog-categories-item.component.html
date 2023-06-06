@@ -1,4 +1,10 @@
-<div class="category-item-wrapper" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false" [class.category-item-hover]="isHovered">
+<div
+  class="category-item-wrapper"
+  (mouseenter)="isHovered = true"
+  (mouseleave)="isHovered = false"
+  [class.category-item-hover]="isHovered"
+  (click)="onClickCategory()"
+>
   <span class="category-item-name">
     {{ name }}
   </span>

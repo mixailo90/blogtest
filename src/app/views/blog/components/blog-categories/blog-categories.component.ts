@@ -37,10 +37,11 @@ export class BlogCategoriesComponent implements OnInit {
   ngOnInit() {
     this.getCategories();
   }
-  deleteCategory(id: number | null) {
-    this.blogCategoryService.delete(id).subscribe({
+  deleteCategory(data: { id: number | null; event: MouseEvent }) {
+    data.event.stopPropagation();
+    this.blogCategoryService.delete(data.id).subscribe({
       next: result => {
-        const index = this.categories.findIndex(item => item.id === id);
+        const index = this.categories.findIndex(item => item.id === data.id);
         this.categories.splice(index, 1);
       },
       error: e => {
@@ -49,8 +50,10 @@ export class BlogCategoriesComponent implements OnInit {
     });
   }
 
-  selectCategory(id: number): void {
-    this.filterService.updateCategory(id);
+  selectCategory(id: number | null): void {
+    if (typeof id === 'number') {
+      this.filterService.updateCategory(id);
+    }
   }
 
   private getCategories(): void {

@@ -23,9 +23,9 @@ export abstract class BaseService {
     return this.http.get<ApiResponse<T>>(url).pipe(map(response => response.resultData));
   }
 
-  public search<T>(params: HttpParams): Observable<T[]> {
+  public search<T>(params: HttpParams): Observable<T> {
     const url = `${environment.API_BASE_URL}/${this.name}/search`;
-    return this.http.get<ApiResponse<T>>(url, { params }).pipe(map((response: any) => response.resultData));
+    return this.http.get<ApiResponse<T>>(url, { params }).pipe(map(response => response.resultData));
   }
 
   public create<T, K>(body: K): Observable<T> {

@@ -4,6 +4,7 @@ import { BlogPostService } from '../../services/blog-post.service';
 import { BlogPostResponse } from '../../../../models/response/blog-post.response';
 import { FilterService } from '../../services/filter.service';
 import { forkJoin } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-blog-posts',
@@ -17,12 +18,31 @@ export class BlogPostsComponent implements OnInit {
 
   ngOnInit() {
     this.filterService.searchTerm$.subscribe((term: string) => {
-      // TODO: on term change
+      if (term === '') {
+        this.getPosts();
+      } else {
+        let params = new HttpParams();
+        params = params.set('term', term);
+        this.blogPostService.search<BlogPostResponse[]>(params).subscribe({
+          next: result => {
+            this.posts = result;
+          },
+          error: e => {
+            console.log(e);
+          },
+        });
+      }
     });
     this.filterService.category$.subscribe((category: number) => {
-      // TODO: on category change
+      this.blogPostService.filterByCategory(category).subscribe({
+        next: result => {
+          this.posts = result;
+        },
+        error: e => {
+          console.log(e);
+        },
+      });
     });
-    this.getPosts();
   }
 
   private getPosts(): void {
