@@ -3,8 +3,8 @@ import { BlogCategoryService } from '../../services/blog-category.service';
 import { BlogCategory } from '../../../../models/response/blog.category';
 import { MatDialog } from '@angular/material/dialog';
 import { AddNewCategoryDialogComponent } from './add-new-category-dialog/add-new-category-dialog.component';
-import {BlogCategoryRequest} from "../../../../models/request/blog-category.request";
-import {FilterService} from "../../services/filter.service";
+import { BlogCategoryRequest } from '../../../../models/request/blog-category.request';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-blog-categories',

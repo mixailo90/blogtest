@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BlogPostService } from '../../services/blog-post.service';
 import { BlogPostResponse } from '../../../../models/response/blog-post.response';
-import {FilterService} from "../../services/filter.service";
-import {forkJoin} from "rxjs";
+import { FilterService } from '../../services/filter.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-blog-posts',
@@ -21,7 +21,7 @@ export class BlogPostsComponent implements OnInit {
     });
     this.filterService.category$.subscribe((category: number) => {
       // TODO: on category change
-    })
+    });
     this.getPosts();
   }
 
