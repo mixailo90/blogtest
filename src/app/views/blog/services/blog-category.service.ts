@@ -11,7 +11,7 @@ import { BlogCategoryResponse } from '../../../models/response/blog-category.res
 export class BlogCategoryService {
   constructor(private http: HttpClient) {}
 
-  public getAll(): Observable<BlogCategoryResponse[]> {
+  public getList(): Observable<BlogCategoryResponse[]> {
     const url = `${environment.API_BASE_URL}/category`;
     return this.http.get<BlogCategoryResponse[]>(url).pipe(map((response: any) => response.resultData));
   }
@@ -22,7 +22,7 @@ export class BlogCategoryService {
     return this.http.post<BlogCategoryResponse>(url, body);
   }
 
-  public delete(id: number): Observable<void> {
+  public delete(id: number | null): Observable<void> {
     const url = `${environment.API_BASE_URL}/category/${id}`;
     return this.http.delete<void>(url);
   }

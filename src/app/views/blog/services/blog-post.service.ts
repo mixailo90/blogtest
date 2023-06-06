@@ -11,7 +11,7 @@ import { BlogPostRequest, BlogPostUpdateRequest } from '../../../models/request/
 export class BlogCategoryService {
   constructor(private http: HttpClient) {}
 
-  public getAll(): Observable<BlogPostResponse[]> {
+  public getList(): Observable<BlogPostResponse[]> {
     const url = `${environment.API_BASE_URL}/blogposts`;
     return this.http.get<BlogPostResponse[]>(url).pipe(map((response: any) => response.resultData));
   }

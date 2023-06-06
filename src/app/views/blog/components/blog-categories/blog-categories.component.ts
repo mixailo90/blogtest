@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogCategoryService } from '../../services/blog-category.service';
 import { BlogCategoryResponse } from '../../../../models/response/blog-category.response';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddNewCategoryDialogComponent } from './add-new-category-dialog/add-new-category-dialog.component';
 
 @Component({
@@ -17,14 +17,16 @@ export class BlogCategoriesComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddNewCategoryDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      this.blogCategoryService.create(result).subscribe({
-        next: result => {
-          this.categories.push(result);
-        },
-        error: e => {
-          console.log(e);
-        },
-      });
+      if (result) {
+        this.blogCategoryService.create(result).subscribe({
+          next: result => {
+            this.categories.push(result);
+          },
+          error: e => {
+            console.log(e);
+          },
+        });
+      }
     });
   }
   ngOnInit() {
