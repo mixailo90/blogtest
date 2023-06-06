@@ -1,0 +1,6 @@
+<div class="category-item-wrapper" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false" [class.category-item-hover]="isHovered">
+  <span class="category-item-name">
+    {{ name }}
+  </span>
+  <button class="category-item-delete-button" *ngIf="isHovered" (click)="onDeleteCategory()"><fa-icon [icon]="faTrash"></fa-icon></button>
+</div>

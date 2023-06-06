@@ -1,0 +1,27 @@
+.categories {
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+  &-item-wrapper {
+    width: 100%;
+    height: 40px;
+  }
+  &-add-new {
+    width: 100%;
+  }
+}
+@media (max-width: 959px) {
+  .categories {
+    &-wrapper {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    &-item-wrapper {
+      width: 50%;
+    }
+  }
+}
