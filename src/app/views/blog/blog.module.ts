@@ -10,9 +10,17 @@ import { BlogCategoriesItemComponent } from './components/blog-categories/blog-c
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AddNewCategoryDialogComponent } from './components/blog-categories/add-new-category-dialog/add-new-category-dialog.component';
 import { BlogPostsComponent } from './components/blog-posts/blog-posts.component';
+import { BlogPostItemComponent } from './components/blog-posts/blog-post-item/blog-post-item.component';
 
 @NgModule({
-  declarations: [BlogComponent, BlogCategoriesComponent, BlogCategoriesItemComponent, AddNewCategoryDialogComponent, BlogPostsComponent],
+  declarations: [
+    BlogComponent,
+    BlogCategoriesComponent,
+    BlogCategoriesItemComponent,
+    AddNewCategoryDialogComponent,
+    BlogPostsComponent,
+    BlogPostItemComponent,
+  ],
   imports: [CommonModule, SharedModule, BlogRoutingModule, RouterOutlet, FontAwesomeModule],
   providers: [BlogCategoryService],
 })

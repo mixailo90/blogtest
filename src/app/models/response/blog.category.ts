@@ -2,12 +2,13 @@ export interface IBlogCategoryResponse {
   id: number;
   name: string;
 }
-export class BlogCategoryResponse implements IBlogCategoryResponse {
+
+export class BlogCategory implements IBlogCategoryResponse {
   id: number;
   name: string;
 
-  constructor(id: number, name: string) {
-    this.id = id;
-    this.name = name;
+  constructor(data: any) {
+    this.id = data?.id;
+    this.name = data?.name;
   }
 }

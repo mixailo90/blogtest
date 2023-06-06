@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogCategoryService } from '../../services/blog-category.service';
-import { BlogCategoryResponse } from '../../../../models/response/blog-category.response';
+import { BlogCategory } from '../../../../models/response/blog.category';
 import { MatDialog } from '@angular/material/dialog';
 import { AddNewCategoryDialogComponent } from './add-new-category-dialog/add-new-category-dialog.component';
+import {BlogCategoryRequest} from "../../../../models/request/blog-category.request";
+import {FilterService} from "../../services/filter.service";
 
 @Component({
   selector: 'app-blog-categories',
@@ -10,17 +12,20 @@ import { AddNewCategoryDialogComponent } from './add-new-category-dialog/add-new
   styleUrls: ['./blog-categories.component.scss'],
 })
 export class BlogCategoriesComponent implements OnInit {
-  categories: BlogCategoryResponse[] = [];
+  categories: BlogCategory[] = [];
 
-  constructor(private blogCategoryService: BlogCategoryService, public dialog: MatDialog) {}
+  constructor(private blogCategoryService: BlogCategoryService, public dialog: MatDialog, private filterService: FilterService) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddNewCategoryDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.blogCategoryService.create(result).subscribe({
+    dialogRef.afterClosed().subscribe(name => {
+      if (name) {
+        const newCategory = new BlogCategoryRequest(name);
+        this.blogCategoryService.create<BlogCategory, BlogCategoryRequest>(newCategory).subscribe({
           next: result => {
-            this.categories.push(result);
+            console.log(result);
+            this.categories.push(new BlogCategory(result));
+            console.log(this.categories);
           },
           error: e => {
             console.log(e);
@@ -43,10 +48,15 @@ export class BlogCategoriesComponent implements OnInit {
       },
     });
   }
+
+  selectCategory(id: number): void {
+    this.filterService.updateCategory(id);
+  }
+
   private getCategories(): void {
-    this.blogCategoryService.getList().subscribe({
+    this.blogCategoryService.getList<BlogCategory[]>().subscribe({
       next: result => {
-        this.categories = result;
+        this.categories = (result || []).map(category => new BlogCategory(category));
       },
       error: e => {
         console.log(e);

@@ -12,7 +12,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), CommonModule, SharedModule],
+  imports: [RouterModule.forChild(routes), SharedModule],
   exports: [RouterModule],
 })
 export class BlogRoutingModule {}

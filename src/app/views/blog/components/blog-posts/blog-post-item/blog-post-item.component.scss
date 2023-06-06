@@ -1,0 +1,40 @@
+.blog-post {
+  display: flex;
+  flex-direction: column;
+  background: #e6e6e6;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  &-header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+  }
+  &-image {
+    margin-right: 15px;
+  }
+  &-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    &-title {
+      font-size: 22px;
+      font-weight: bold;
+      text-transform: capitalize;
+      margin-bottom: 10px;
+    }
+    &-date {
+      font-size: 12px;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  &-content {
+    margin-bottom: 25px;
+  }
+  &-gallery {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
