@@ -6,6 +6,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./views/blog/blog.module').then(m => m.BlogModule),
   },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
