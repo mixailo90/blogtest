@@ -5,7 +5,7 @@ export interface IBlogPostResponse {
   categoryId: number;
   createdAt: Date;
 }
-export class BlogPostResponse implements IBlogPostResponse {
+export class BlogPost implements IBlogPostResponse {
   id: number;
   title: string;
   text: string;

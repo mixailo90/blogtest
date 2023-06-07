@@ -3,10 +3,13 @@
   (mouseenter)="isHovered = true"
   (mouseleave)="isHovered = false"
   [class.category-item-hover]="isHovered"
+  [class.category-item-active]="isActive"
   (click)="onClickCategory()"
 >
   <span class="category-item-name">
     {{ name }}
   </span>
-  <button class="category-item-delete-button" *ngIf="isHovered" (click)="onDeleteCategory()"><fa-icon [icon]="faTrash"></fa-icon></button>
+  <button class="category-item-delete-button" *ngIf="isHovered && id !== -1 && id !== 0" (click)="onDeleteCategory($event)">
+    <fa-icon [icon]="faTrash"></fa-icon>
+  </button>
 </div>

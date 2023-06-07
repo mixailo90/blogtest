@@ -21,6 +21,7 @@ export class BlogComponent extends BaseComponent implements OnInit {
     const inputValue = (event.target as HTMLInputElement).value;
     this.inputValueSubject.next(inputValue);
   }
+
   ngOnInit() {
     this.inputValueSubject.pipe(takeUntil(this.ngSubscriptions), debounceTime(800)).subscribe(value => {
       this.filterService.updateSearchTerm(value);

@@ -3,3 +3,8 @@
   flex-direction: column;
   width: 500px;
 }
+@media (max-width: 959px) {
+  .add-new-post-form {
+    width: 100%;
+  }
+}

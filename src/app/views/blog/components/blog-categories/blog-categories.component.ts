@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { takeUntil } from 'rxjs';
 import { BlogCategoryService } from '../../services/blog-category.service';
 import { BlogCategory } from '../../../../models/response/blog.category';
 import { AddNewCategoryDialogComponent } from './add-new-category-dialog/add-new-category-dialog.component';
 import { BlogCategoryRequest } from '../../../../models/request/blog-category.request';
 import { FilterService } from '../../services/filter.service';
 import { BaseComponent } from '../../../../shared/components/base.component';
-import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-blog-categories',
@@ -16,6 +16,7 @@ import { takeUntil } from 'rxjs';
 })
 export class BlogCategoriesComponent extends BaseComponent implements OnInit {
   categories: BlogCategory[] = [];
+  selectedCategoryId = -1;
 
   constructor(
     private blogCategoryService: BlogCategoryService,
@@ -24,6 +25,15 @@ export class BlogCategoriesComponent extends BaseComponent implements OnInit {
     private _snackBar: MatSnackBar,
   ) {
     super();
+  }
+
+  ngOnInit() {
+    this.getCategories();
+    this.filterService.searchTerm$.pipe(takeUntil(this.ngSubscriptions)).subscribe((term: string) => {
+      if (term === '') {
+        this.selectedCategoryId = -1;
+      }
+    });
   }
 
   openDialog(): void {
@@ -48,10 +58,9 @@ export class BlogCategoriesComponent extends BaseComponent implements OnInit {
         }
       });
   }
-  ngOnInit() {
-    this.getCategories();
-  }
+
   deleteCategory(data: { id: number | null; event: MouseEvent }) {
+    data.event.stopPropagation();
     this.blogCategoryService
       .delete(data.id)
       .pipe(takeUntil(this.ngSubscriptions))
@@ -68,7 +77,12 @@ export class BlogCategoriesComponent extends BaseComponent implements OnInit {
 
   selectCategory(id: number | null): void {
     if (typeof id === 'number') {
-      this.filterService.updateCategory(id);
+      this.selectedCategoryId = id;
+      if (id === -1) {
+        this.filterService.updateSearchTerm('');
+      } else {
+        this.filterService.updateCategory(id);
+      }
     }
   }
 

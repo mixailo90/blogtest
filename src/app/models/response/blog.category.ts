@@ -6,9 +6,8 @@ export interface IBlogCategoryResponse {
 export class BlogCategory implements IBlogCategoryResponse {
   id: number;
   name: string;
-
-  // eslint-disable-next-line no-explicit-any
   constructor(data: any) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.id = data?.id;
     this.name = data?.name;
   }

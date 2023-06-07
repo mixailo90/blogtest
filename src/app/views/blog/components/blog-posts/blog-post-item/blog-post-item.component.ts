@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { format, parse } from 'date-fns';
+import { format } from 'date-fns';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { BlogPostUpdateRequest } from '../../../../../models/request/blog-post.request';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-blog-post-item',
@@ -12,11 +11,12 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 export class BlogPostItemComponent implements OnInit {
   @Output() deleteEvent = new EventEmitter<number | null>();
   @Output() editPostEvent = new EventEmitter<BlogPostUpdateRequest>();
-  @Input() id: number = 0;
+  @Input() id = 0;
   @Input() title = '';
   @Input() text = '';
-  @Input() categoryId: number = 0;
+  @Input() categoryId = 0;
   @Input() createdAt: Date = new Date();
+
   formatDate = '';
   formatTime = '';
   faTrash = faTrash;
@@ -30,6 +30,7 @@ export class BlogPostItemComponent implements OnInit {
   onDeleteEvent(): void {
     this.deleteEvent.emit(this.id);
   }
+
   onEditPostEvent(): void {
     this.editPostEvent.emit(new BlogPostUpdateRequest(this.id, this.title, this.text, this.categoryId));
   }

@@ -1,11 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { BlogPostResponse } from '../../../../../models/response/blog-post.response';
-import { BlogCategory } from '../../../../../models/response/blog.category';
-import { BlogCategoryService } from '../../../services/blog-category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { takeUntil } from 'rxjs';
+import { BlogPost } from '../../../../../models/response/blog.post';
+import { BlogCategory } from '../../../../../models/response/blog.category';
+import { BlogCategoryService } from '../../../services/blog-category.service';
 import { BaseComponent } from '../../../../../shared/components/base.component';
 
 @Component({
@@ -13,27 +13,26 @@ import { BaseComponent } from '../../../../../shared/components/base.component';
   templateUrl: './add-edit-post-dialog.component.html',
   styleUrls: ['./add-edit-post-dialog.component.scss'],
 })
-export class AddEditPostDialogComponent extends BaseComponent {
+export class AddEditPostDialogComponent extends BaseComponent implements OnInit {
   form: FormGroup = this.fb.group({
     title: ['', Validators.required],
     text: ['', Validators.required],
-    categoryId: ['', Validators.required],
+    categoryId: [''],
   });
   categories: BlogCategory[] = [];
-  editMode: boolean = false;
+  editMode = false;
 
   constructor(
     private blogCategoryService: BlogCategoryService,
     private _snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<AddEditPostDialogComponent>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data?: BlogPostResponse,
+    @Inject(MAT_DIALOG_DATA) public data?: BlogPost,
   ) {
     super();
   }
 
   ngOnInit() {
-    console.log(this.data);
     this.form = this.fb.group({
       title: [this.data?.title, Validators.required],
       text: [this.data?.text, Validators.required],
