@@ -12,11 +12,12 @@ export class BlogPostResponse implements IBlogPostResponse {
   categoryId: number;
   createdAt: Date;
 
-  constructor(id: number, title: string, text: string, categoryId: number, createdAt: Date) {
-    this.id = id;
-    this.title = title;
-    this.text = text;
-    this.categoryId = categoryId;
-    this.createdAt = createdAt;
+  // eslint-disable-next-line no-explicit-any
+  constructor(data: any) {
+    this.id = data?.id;
+    this.title = data.title;
+    this.text = data.text;
+    this.categoryId = data.categoryId;
+    this.createdAt = data.createdAt;
   }
 }

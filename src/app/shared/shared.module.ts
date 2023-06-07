@@ -6,8 +6,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -20,6 +23,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     FormsModule,
     MatDialogModule,
+    MatSnackBarModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   exports: [
     MatSidenavModule,
@@ -30,6 +36,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     FormsModule,
     MatDialogModule,
+    MatSnackBarModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
 })
 export class SharedModule {}

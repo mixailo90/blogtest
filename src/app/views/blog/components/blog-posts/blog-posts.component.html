@@ -1,3 +1,14 @@
+<div class="posts-add-new">
+  <button mat-raised-button color="accent" (click)="openPostDialog()">New <fa-icon [icon]="faPlus"></fa-icon></button>
+</div>
 <div class="posts-item-wrapper" *ngFor="let item of posts">
-  <app-blog-post-item [id]="item.id" [title]="item.title" [text]="item.text" [createdAt]="item.createdAt"></app-blog-post-item>
+  <app-blog-post-item
+    [id]="item.id"
+    [title]="item.title"
+    [text]="item.text"
+    [createdAt]="item.createdAt"
+    [categoryId]="item.categoryId"
+    (editPostEvent)="openPostDialog($event)"
+    (deleteEvent)="deletePost($event)"
+  ></app-blog-post-item>
 </div>

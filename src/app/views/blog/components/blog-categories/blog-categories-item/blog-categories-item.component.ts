@@ -9,7 +9,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class BlogCategoriesItemComponent {
   @Output() deleteEvent = new EventEmitter<{ id: number | null; event: MouseEvent }>();
   @Output() clickCategory = new EventEmitter<number | null>();
-  @Input() name: string = '';
+  @Input() name = '';
   @Input() id: number | null = null;
   isHovered = false;
   faTrash = faTrash;

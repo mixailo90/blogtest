@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogCategoryService } from './services/blog-category.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { BlogCategoryService } from './services/blog-category.service';
 import { FilterService } from './services/filter.service';
 
 @Component({
@@ -11,19 +11,16 @@ import { FilterService } from './services/filter.service';
 })
 export class BlogComponent implements OnInit {
   private inputValueSubject = new Subject<string>();
-  constructor(private blogCategoryService: BlogCategoryService, private filterService: FilterService) {
-    this.inputValueSubject.pipe(debounceTime(800)).subscribe(value => {
-      this.filterService.updateSearchTerm(value);
-    });
-  }
 
-  onInputChange(event: any) {
-    const inputValue = event.target.value;
+  constructor(private blogCategoryService: BlogCategoryService, private filterService: FilterService) {}
+
+  onInputChange(event: Event) {
+    const inputValue = (event.target as HTMLInputElement).value;
     this.inputValueSubject.next(inputValue);
   }
   ngOnInit() {
-    // this.blogCategoryService.getAll().subscribe((response: BlogCategoryResponse[])=>{
-    //   console.log(response)
-    // })
+    this.inputValueSubject.pipe(debounceTime(800)).subscribe(value => {
+      this.filterService.updateSearchTerm(value);
+    });
   }
 }

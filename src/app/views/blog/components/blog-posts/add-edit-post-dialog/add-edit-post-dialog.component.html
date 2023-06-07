@@ -1,0 +1,24 @@
+<div mat-dialog-content>
+  <h3 *ngIf="!editMode">Create new post</h3>
+  <h3 *ngIf="editMode">Edit post</h3>
+  <form [formGroup]="form" class="add-new-post-form">
+    <mat-form-field>
+      <input matInput formControlName="title" placeholder="Title" />
+      <mat-error *ngIf="form.get('title')?.hasError('required')">Title is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput formControlName="text" placeholder="Text"></textarea>
+      <mat-error *ngIf="form.get('text')?.hasError('required')">Text is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="categoryId">
+        <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button [mat-dialog-close]="form.value" color="primary" type="submit" [disabled]="form.invalid">Post</button>
+  </form>
+</div>

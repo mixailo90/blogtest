@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BlogCategoryService } from '../../services/blog-category.service';
 import { BlogCategory } from '../../../../models/response/blog.category';
-import { MatDialog } from '@angular/material/dialog';
 import { AddNewCategoryDialogComponent } from './add-new-category-dialog/add-new-category-dialog.component';
 import { BlogCategoryRequest } from '../../../../models/request/blog-category.request';
 import { FilterService } from '../../services/filter.service';
@@ -14,7 +15,12 @@ import { FilterService } from '../../services/filter.service';
 export class BlogCategoriesComponent implements OnInit {
   categories: BlogCategory[] = [];
 
-  constructor(private blogCategoryService: BlogCategoryService, public dialog: MatDialog, private filterService: FilterService) {}
+  constructor(
+    private blogCategoryService: BlogCategoryService,
+    public dialog: MatDialog,
+    private filterService: FilterService,
+    private _snackBar: MatSnackBar,
+  ) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddNewCategoryDialogComponent);
@@ -23,12 +29,10 @@ export class BlogCategoriesComponent implements OnInit {
         const newCategory = new BlogCategoryRequest(name);
         this.blogCategoryService.create<BlogCategory, BlogCategoryRequest>(newCategory).subscribe({
           next: result => {
-            console.log(result);
             this.categories.push(new BlogCategory(result));
-            console.log(this.categories);
           },
           error: e => {
-            console.log(e);
+            this._snackBar.open(e, '', { duration: 3000 });
           },
         });
       }
@@ -38,14 +42,13 @@ export class BlogCategoriesComponent implements OnInit {
     this.getCategories();
   }
   deleteCategory(data: { id: number | null; event: MouseEvent }) {
-    data.event.stopPropagation();
     this.blogCategoryService.delete(data.id).subscribe({
-      next: result => {
+      next: () => {
         const index = this.categories.findIndex(item => item.id === data.id);
         this.categories.splice(index, 1);
       },
       error: e => {
-        console.log(e);
+        this._snackBar.open(e, '', { duration: 3000 });
       },
     });
   }
@@ -62,7 +65,7 @@ export class BlogCategoriesComponent implements OnInit {
         this.categories = (result || []).map(category => new BlogCategory(category));
       },
       error: e => {
-        console.log(e);
+        this._snackBar.open(e, '', { duration: 3000 });
       },
     });
   }
